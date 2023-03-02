@@ -7,7 +7,13 @@ logger.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=log
 # Méthode permetant de se connecter à la base de données
 # Retourne un objet de connexion Ouvert
 def connectToDatabase(host, user, password, db, port):
-    mysql = pymysql.connect(host = host, user = user, password = password, db = db, port = 3306)
+    mysql = pymysql.connect(host = host, user = user, password = password, db = db, port = 25060,ssl={
+        'ssl': {
+            'ca': 'ca-cert.pem',
+            #'key': 'client-cert.pem',
+            #'cert': 'client-key.pem'
+        }
+    })
     logger.info("CONNEXION A LA BASE DE DONNES ETABLIE")
     return mysql
     try:
