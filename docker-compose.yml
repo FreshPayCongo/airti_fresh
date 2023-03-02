@@ -1,0 +1,22 @@
+version: "3.3"
+
+services: 
+  flask:
+    build: ./airtime
+    container_name: airtime
+    volumes: 
+      - ./airtime:/home/fp_airtime_middleware/
+    restart: always
+    environment: 
+      - APP_NAME=MyMiddleWare
+    expose: 
+      - 8080
+    sysctls:
+         net.core.somaxconn: 1024
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    restart: always
+    ports: 
+      - "2801:80"
